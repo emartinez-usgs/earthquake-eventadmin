@@ -63,7 +63,9 @@ AdminSummaryPage.prototype._getTexts = function (type) {
   fragment.appendChild(el);
   texts = this._event.properties.products[type];
   if (texts) {
-    texts = CatalogEvent.getWithoutSuperseded(texts);
+    texts = CatalogEvent.getWithoutDeleted(
+        CatalogEvent.getWithoutSuperseded(texts));
+
     texts.forEach(function (product) {
       fragment.appendChild(this._getText(product));
     }, this);
@@ -138,7 +140,9 @@ AdminSummaryPage.prototype._getLinks = function () {
   // add link products
   links = this._event.properties.products['general-link'];
   if (links) {
-    links = CatalogEvent.getWithoutSuperseded(links);
+    links = CatalogEvent.getWithoutDeleted(
+        CatalogEvent.getWithoutSuperseded(links));
+
     links.forEach(function (product) {
       var el = document.createElement('li');
       el.appendChild(this._getLink(product));

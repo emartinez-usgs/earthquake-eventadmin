@@ -75,7 +75,8 @@ AdminScientificSummaryPage.prototype.getLinks = function () {
   // add link products
   links = this._event.properties.products['scitech-link'];
   if (links) {
-    links = CatalogEvent.getWithoutSuperseded(links);
+    links = CatalogEvent.getWithoutDeleted(
+        CatalogEvent.getWithoutSuperseded(links));
     links.forEach(function (product) {
       var el = document.createElement('li');
       el.appendChild(this.getLink(product));
@@ -173,7 +174,8 @@ AdminScientificSummaryPage.prototype._getAddLinkClick = function () {
   fragment.appendChild(el);
   texts = this._event.properties.products[type];
   if (texts) {
-    texts = CatalogEvent.getWithoutSuperseded(texts);
+    texts = CatalogEvent.getWithoutDeleted(
+        CatalogEvent.getWithoutSuperseded(texts));
     texts.forEach(function (product) {
       fragment.appendChild(this.getText(product));
     }, this);
