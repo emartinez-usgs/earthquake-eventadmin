@@ -35,27 +35,12 @@ var ProductFactory = function (/*options*/) {
    *         delete product.
    */
   _this.getDelete = function (product) {
-    var code,
-        properties,
-        source,
-        type;
+    var attributes;
 
-    product = _getProduct(product);
-    code = product.get('code');
-    properties = product.get('properties');
-    source = product.get('source');
-    type = product.get('type');
+    attributes = _getProduct(product).toJSON();
+    attributes.status = Product.STATUS_DELETE;
 
-    return Product({
-      source: source,
-      type: type,
-      status: Product.STATUS_DELETE,
-      code: code,
-      properties: {
-        eventsource: properties.eventsource,
-        eventsourcecode: properties.eventsourcecode
-      }
-    });
+    return Product(attributes);
   };
 
   /**
