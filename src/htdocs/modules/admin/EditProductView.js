@@ -14,7 +14,7 @@ var ContentsManagerView = require('ContentsManagerView'),
 
 
 var PRIORITY_PROPERTIES = {
-  'region': {
+  'title': {
     type: 'text',
     label: 'Region Name',
     help: 'If this product&rsquo;s type is &ldquo;origin&rdquo; then this ' +
